@@ -1,41 +1,48 @@
 <h1> Telco Customer Churn </h1>
 <h2> Secciones del Sprint 1 </h2>
-<h3>Sección 1: Definición del Problema </h3>
-<h4>1. Identificar el Problema de Negocio: </h4>
-<h5>Contexto del problema:</h5>
-<ol>
+<h2>Sección 1: Definición del Problema </h2>
+<h3>1. Identificar el Problema de Negocio: </h3>
+<h4>Contexto del problema:</h4>
+<ul>
    <li>Total de clientes: 7,043</li>
    <li>Tasa de churn actual: 26.54%</li>
    <li>Ingreso promedio mensual por cliente: $64.76</li>
    <li>Pérdida anual estimada: $1,452,475.24</li>
    <li>Clientes que abandonan mensualmente: 1869</li>
-</ol>
-<h5>Impacto:</h5> 
+</ul>
+<h4>Impacto:</h4> 
 <p>
 “La empresa enfrenta una rotación del 26.5% de su base de clientes, esto representa una pérdida anual estimada de $1,452,475.24 y de aquí es que surge la necesidad crítica de implementar estrategias de fidelización de clientes”   
 </p>
+<h3>2. Establecer Objetivos Analíticos:</h3>
+<ul>
+   <li>Predecir clientes con alta probabilidad de abandono en los próximos 30 días</li>
+   <li>Alcanzar recall del 80% y precisión del 75% en la detección de churn</li>
+   <li>Utilizando datos históricos de comportamiento y contratos</li>
+   <li>Reducir la tasa de churn en al menos 15% en 6 meses</li>
+   <li>Implementar el modelo en producción en 8 semanas</li>
+</ul>
 <p>
+<h3>3. Delimitar el Alcance: </h3>
+<h4>Variables objetivo:</h4>
+<ul>
+   <li>Variable dependiente: Churn (binaria - Yes/No)</li>
+   <li>Horizonte temporal: Próximos 30 días</li>
+</ul>
+<h4>Variables predictoras disponibles:</h4>
+<ul>
+   <li>Demográficas: 4 variables</li>
+   <li>Servicios: 4 variables</li>
+   <li>Contrato y facturación: 6 variables</li>
+</ul>
+<h4>Restricciones identificadas:</h4>
+<ul>
+   <li>Éticas: Datos anonimizados, sin información personal sensible</li>
+   <li>Técnicas: Python, scikit-learn, 8GB RAM mínimo y 16 GB de RAM ideal</li>
+   <li>Temporales: 4 semanas para desarrollo del modelo</li>
+   <li>Datos: Dataset balanceado artificialmente para entrenamiento</li>
+</ul>
 
-
-2. Establecer Objetivos Analíticos: 
-•	Predecir clientes con alta probabilidad de abandono en los próximos 30 días
-•	Alcanzar recall del 80% y precisión del 75% en la detección de churn
-•	Utilizando datos históricos de comportamiento y contratos
-•	Reducir la tasa de churn en al menos 15% en 6 meses
-•	Implementar el modelo en producción en 8 semanas
-3. Delimitar el Alcance: 
-Variables objetivo:
-• Variable dependiente: Churn (binaria - Yes/No)
-• Horizonte temporal: Próximos 30 días
-Variables predictoras disponibles:
-• Demográficas: 4 variables
-• Servicios: 4 variables
-• Contrato y facturación: 6 variables
-Restricciones identificadas:
-• Éticas: Datos anonimizados, sin información personal sensible
-• Técnicas: Python, scikit-learn, 8GB RAM mínimo y 16 GB de RAM ideal
-• Temporales: 4 semanas para desarrollo del modelo
-• Datos: Dataset balanceado artificialmente para entrenamiento
 4. Formular Hipótesis Iniciales: 
 Hipótesis principales:
 • H1: Los clientes con contratos mensuales tienen 3 veces mayor probabilidad de abandono que los de contratos anuales
