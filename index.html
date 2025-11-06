@@ -1,1 +1,59 @@
-<h1> Github pages - Modelo predictivo para la detección de clientes con probabilidad alta de abandono </h1>h1>
+<h1> Telco Customer Churn </h1>
+<h2> Secciones del Sprint 1 </h2>
+<h3>Sección 1: Definición del Problema </h3>
+<h4>1. Identificar el Problema de Negocio: </h4>
+<h5>Contexto del problema:</h5>
+<p>• Total de clientes: 7,043
+• Tasa de churn actual: 26.54%
+• Ingreso promedio mensual por cliente: $64.76
+• Pérdida anual estimada: $1,452,475.24
+• Clientes que abandonan mensualmente: 1869
+</p>
+<p>
+Impacto:
+“La empresa enfrenta una rotación del 26.5% de su base de clientes, esto representa una pérdida anual estimada de $1,452,475.24 y de aquí es que surge la necesidad crítica de implementar estrategias de fidelización de clientes”
+2. Establecer Objetivos Analíticos: 
+•	Predecir clientes con alta probabilidad de abandono en los próximos 30 días
+•	Alcanzar recall del 80% y precisión del 75% en la detección de churn
+•	Utilizando datos históricos de comportamiento y contratos
+•	Reducir la tasa de churn en al menos 15% en 6 meses
+•	Implementar el modelo en producción en 8 semanas
+3. Delimitar el Alcance: 
+Variables objetivo:
+• Variable dependiente: Churn (binaria - Yes/No)
+• Horizonte temporal: Próximos 30 días
+Variables predictoras disponibles:
+• Demográficas: 4 variables
+• Servicios: 4 variables
+• Contrato y facturación: 6 variables
+Restricciones identificadas:
+• Éticas: Datos anonimizados, sin información personal sensible
+• Técnicas: Python, scikit-learn, 8GB RAM mínimo y 16 GB de RAM ideal
+• Temporales: 4 semanas para desarrollo del modelo
+• Datos: Dataset balanceado artificialmente para entrenamiento
+4. Formular Hipótesis Iniciales: 
+Hipótesis principales:
+• H1: Los clientes con contratos mensuales tienen 3 veces mayor probabilidad de abandono que los de contratos anuales
+• H2: La falta de servicios de seguridad online incrementa en 40% la probabilidad de abandono
+• H3: Los clientes con menos de 12 meses de antigüedad representan el 50% del total de abandonos
+• H4: El método de pago electrónico reduce en 25% la probabilidad de abandono
+5. Criterio de Éxito: El problema debe expresarse en términos cuantitativos, con al menos una métrica de éxito definida 
+Criterios de éxito del modelo:
+• Recall: 0.80
+• Precision: 0.75
+• AUC-ROC: 0.85
+• F1-Score: 0.77
+• Reducción_churn: 15%
+• ROI_minimo: 300%
+Interpretación de criterios:
+• Recall 80%: De cada 10 clientes que abandonan, detectamos al menos 8
+• Precisión 75%: De cada 10 alertas de churn, 7.5 son reales
+• ROI 3:1: Por cada $1 en retenciones, generamos $3 en ingresos preservados
+6. Pregunta de la investigación: 
+Tipo de pregunta: predictiva
+Pregunta principal de investigación:
+   ¿Podemos predecir qué clientes tienen alta probabilidad de abandonar el servicio
+    en los próximos 30 días, utilizando sus características demográficas, de contrato,
+    servicios contratados y patrones de facturación?
+  
+</p>
