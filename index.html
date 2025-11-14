@@ -327,9 +327,38 @@ for modelo, metrics in resultados.items():
                 <td></td>                
             </tr>
         </tbody>
-    </table>
-    
-    
+    </table>    
+    <h3 style="color: #004B5F;">4. Interpretación  </h3>
+    <ul>
+        <li>Clientes totales: 7,043</li>
+        <li>Tasa de abandono mensual: 26.54%</li>
+        <li>Clientes que abandonan mensualmente: 1869</li>
+        <li>Ingreso promedio mensual: $64.76</li>
+        <li>Valor anual por cliente: $777.14</li>
+        <li>Costo campaña retención por cliente: $50</li>
+    </ul>
+    <strong>RANDOM FOREST:</strong> 
+    <ul>
+        <li>Recall: 48.8% → Detecta 912 de 1869 abandonos reales</li>
+        <li>Clientes a contactar: 1643 (incluye 731 falsos positivos)</li>
+        <li>Costo campaña: $82,155</li>
+        <li>Ingresos preservados: $59,061</li>
+        <li>ROI: -0.3x ($-23,093 neto)</li>
+    </ul>
+    <strong>REGRESIÓN LOGÍSTICA:</strong> 
+    <ul>
+        <li>Recall: 51.4% → Detecta 961 de 1869 abandonos reales</li>
+        <li>Clientes a contactar: 1720 (incluye 759 falsos positivos)</li>
+        <li>Costo campaña: $86,003</li>
+        <li>Ingresos preservados: $62,235</li>
+        <li>ROI: -0.3x ($-23,768 neto)</li>
+    </ul>
+    <strong>ANÁLISIS:</strong> 
+    <ul>
+        <li>Regresión Logística: Alcanza un mejor balance general y por naturaleza posee una interpretabilidad superior</li>
+        <li>Random Forest: Presenta un mayor recall y una menor precisión, sin embargo es más costoso</li>
+        <li>XGBoost: Posee un mejor AUC y en contrapartida presenta una complejidad operacional</li>        
+    </ul>
 </body>
         
 </html>
