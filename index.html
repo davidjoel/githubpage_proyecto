@@ -36,7 +36,7 @@
 <h4 style="color: #004B5F;">Contexto del problema:</h4>
 <ul>
    <li>Total de clientes: 7,043</li>
-   <li>Tasa de churn actual: 26.54%</li>
+   <li>Tasa de abandono actual: 26.54%</li>
    <li>Ingreso promedio mensual por cliente: $64.76</li>
    <li>Pérdida anual estimada: $1,452,475.24</li>
    <li>Clientes que abandonan mensualmente: 1869</li>
@@ -48,16 +48,16 @@
 <h3 style="color: #004B5F;">2. Establecer Objetivos Analíticos:</h3>
 <ul>
    <li>Predecir clientes con alta probabilidad de abandono en los próximos 30 días</li>
-   <li>Alcanzar recall del 80% y precisión del 75% en la detección de churn</li>
+   <li>Alcanzar recall del 80% y precisión del 75% en la detección de abandono</li>
    <li>Utilizando datos históricos de comportamiento y contratos</li>
-   <li>Reducir la tasa de churn en al menos 15% en 6 meses</li>
+   <li>Reducir la tasa de abandono en al menos 15% en 6 meses</li>
    <li>Implementar el modelo en producción en 8 semanas</li>
 </ul>
 
 <h3 style="color: #004B5F;">3. Delimitar el Alcance: </h3>
 <h4 style="color: #004B5F;">Variables objetivo:</h4>
 <ul>
-   <li>Variable dependiente: Churn (binaria - Yes/No)</li>
+   <li>Variable dependiente: Abandono (binaria - Yes/No)</li>
    <li>Horizonte temporal: Próximos 30 días</li>
 </ul>
 <h4 style="color: #004B5F;">Variables predictoras disponibles:</h4>
@@ -77,17 +77,12 @@
 <h4 style="color: #004B5F;">Hipótesis principales:</h4>
 <ol>
    <li>
-        H1: Los clientes con contratos mensuales tienen 3 veces mayor probabilidad de abandono que los de contratos anuales    
+        H0: Un modelo de prediccion permite determinar la probabilidad de abandono a partir de caracteristicas demograficas y de servicio de un cliente   
    </li>
    <li>
-        H2: La falta de servicios de seguridad online incrementa en 40% la probabilidad de abandono    
+        H2: Un modelo de prediccion no permite determinar la probabilidad de abandono a partir de caracteristicas demograficas y de servicio de un cliente
    </li>
-   <li>
-        H3: Los clientes con menos de 12 meses de antigüedad representan el 50% del total de abandonos    
-   </li>
-   <li>
-      H4: El método de pago electrónico reduce en 25% la probabilidad de abandono      
-   </li>
+  
 </ol>
 <h3 style="color: #004B5F;">5. Criterio de Éxito:</h3>
 <h3 style="color: #004B5F;">Criterios de éxito del modelo:</h3>
@@ -96,21 +91,19 @@
    <li>Precision: 0.75</li>
    <li>AUC-ROC: 0.85</li>
    <li>F1-Score: 0.77</li>
-   <li>Reducción_churn: 15%</li>
+   <li>Reducción_abandono: 15%</li>
    <li>ROI_minimo: 300%</li>
 </ul>
 <h3 style="color: #004B5F;">Interpretación de criterios:</h3>
 <ul>
    <li>Recall 80%: De cada 10 clientes que abandonan, detectamos al menos 8</li>
-   <li>Precisión 75%: De cada 10 alertas de churn, 7.5 son reales</li>
+   <li>Precisión 75%: De cada 10 alertas de abandono, 7.5 son reales</li>
    <li>ROI 3:1: Por cada $1 en retenciones, generamos $3 en ingresos preservados</li>
 </ul>
 <h3 style="color: #004B5F;">6. Pregunta de la investigación: </h3>
 <h3 style="color: #004B5F;">Tipo de pregunta: predictiva</h3>
 <h3 style="color: #004B5F;">Pregunta principal de investigación:</h3>
-<strong>¿Podemos predecir qué clientes tienen alta probabilidad de abandonar el servicio
-    en los próximos 30 días, utilizando sus características demográficas, de contrato,
-    servicios contratados y patrones de facturación?</strong>
+<strong>¿Cual es la probabilidad de abandono de un cliente en una empresa que brinda servicios de telecomunicaciones?</strong>
 <h3 style="color: #004B5F;">7. Identificacion de la variable dependiente e independiente</h3>
 <img src="prueba_tabla.png" />
    
@@ -407,18 +400,30 @@ for modelo, metrics in resultados.items():
     </ul>
     <strong>ANÁLISIS DE INTERPRETABILIDAD:</strong> 
     <ul>
-        <li>Tiempo permanencia: DISMINUYE probabilidad de churn (coef: -1.2396)</li>
-        <li>Cargos mensuales: AUMENTA probabilidad de churn (coef: 0.6893)</li>
-        <li>Tipo de contrato: DISMINUYE probabilidad de churn (coef: -0.6606)</li>
-        <li>Cargos totales: AUMENTA probabilidad de churn (coef: 0.5867)</li>
-        <li>Servicio Telefonico (S/N): DISMINUYE probabilidad de churn (coef: -0.3003)</li>
-        <li>Seguridad en Linea (S/N): DISMINUYE probabilidad de churn (coef: -0.2443)</li>
-        <li>Soporte Tecnico (S/N): DISMINUYE probabilidad de churn (coef: -0.2273)</li>
-        <li>Servicio de Internet (Fibra/DSL): AUMENTA probabilidad de churn (coef: 0.1606)</li>
-        <li>Facturacion sin Papel: AUMENTA probabilidad de churn (coef: 0.1393)</li>
-        <li>Copia de Seguridad en Linea: DISMINUYE probabilidad de churn (coef: -0.1361)</li>
+        <li>Tiempo permanencia: DISMINUYE probabilidad de abandono (coef: -1.2396)</li>
+        <li>Cargos mensuales: AUMENTA probabilidad de abandono (coef: 0.6893)</li>
+        <li>Tipo de contrato: DISMINUYE probabilidad de abandono (coef: -0.6606)</li>
+        <li>Cargos totales: AUMENTA probabilidad de abandono (coef: 0.5867)</li>
+        <li>Servicio Telefonico (S/N): DISMINUYE probabilidad de abandono (coef: -0.3003)</li>
+        <li>Seguridad en Linea (S/N): DISMINUYE probabilidad de abandono (coef: -0.2443)</li>
+        <li>Soporte Tecnico (S/N): DISMINUYE probabilidad de abandono (coef: -0.2273)</li>
+        <li>Servicio de Internet (Fibra/DSL): AUMENTA probabilidad de abandono (coef: 0.1606)</li>
+        <li>Facturacion sin Papel: AUMENTA probabilidad de abandono (coef: 0.1393)</li>
+        <li>Copia de Seguridad en Linea: DISMINUYE probabilidad de abandono (coef: -0.1361)</li>
     </ul>
- 
+     <h3 style="color: #004B5F;">3. Iteración y validacion final </h3>
+    <strong>VERIFICACIÓN CRITERIO PRECISO (5% MEJORA)</strong> 
+    <ul>
+        <li>F1-Score Inicial: 0.5927</li>
+        <li>Mejora Total Alcanzada: +68.72%</li>
+        <li>Diferencia: Objetivo 5%: SUPERADO</li>        
+    </ul>
+    <strong>RESUMEN EJECUTIVO FINAL</strong> 
+    <ul>
+        <li>TÉCNICA OPTIMIZADA: Regresión Logística</li>
+        <li>MEJORA F1-SCORE: +68.72% (de 0.5927 a 1.0000)</li>
+        <li>CARACTERÍSTICAS SELECCIONADAS: 15 de 24 originales</li>        
+    </ul>
   </body>
-        
+
 </html>
