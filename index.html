@@ -163,25 +163,116 @@
 </ul>
 <h3 style="color: #004B5F;">4. Criterio de Éxito  </h3>
 <img src="comparacion_metricas.png" />
-<a href="implementacion_tecnicas_paralelas.ipynb" download="implementacion_tecnicas_paralelas.ipynb">Descargar el codigo</a>
-<br/>
-<pre><code class="language-python">
-from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName("EjemploPySpark").getOrCreate()
-</code></pre>
    
 <div class="code-container">
 <pre><code class="language-python">
-from pyspark.sql import SparkSession
+# IMPLEMENTACIÓN PARALELA DE TÉCNICAS
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.model_selection import train_test_split
 
-# Crear sesión Spark
-spark = SparkSession.builder.appName("EjemploPySpark").getOrCreate()
+print("="*60)
+print("IMPLEMENTACIÓN PARALELA DE TÉCNICAS")
+print("="*60)
 
-# Leer archivo CSV
-df = spark.read.csv("data.csv", header=True, inferSchema=True)
+df_model = pd.read_csv('Telco-Customer-Churn.csv')
 
-# Mostrar datos
-df.show()
+# Limpieza de datos: convertir espacios vacíos a NaN y eliminar o imputar
+df_model['TotalCharges'] = pd.to_numeric(df_model['TotalCharges'], errors='coerce')
+df_model = df_model.dropna()  # Eliminar filas con valores NaN
+
+# Preparación de datos
+df_model = df_model.drop('customerID', axis=1)
+
+# Inicializar LabelEncoder para cada columna (no reutilizar)
+le = LabelEncoder()
+
+# Codificar variables categóricas
+categorical_columns = ['gender', 'Partner', 'Dependents', 'PhoneService', 
+                      'MultipleLines', 'InternetService', 'OnlineSecurity', 
+                      'OnlineBackup', 'DeviceProtection', 'TechSupport', 
+                      'StreamingTV', 'StreamingMovies', 'Contract', 
+                      'PaperlessBilling', 'PaymentMethod', 'Churn']
+
+for col in categorical_columns:
+    df_model[col] = le.fit_transform(df_model[col].astype(str))
+
+X = df_model.drop('Churn', axis=1)
+y = df_model['Churn']
+
+# División train-test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Estandarización para Regresión Logística
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Configuración de validación cruzada
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+# Modelos
+modelos = {
+    'Regresión Logística': LogisticRegression(random_state=42, max_iter=1000),
+    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
+    'XGBoost': XGBClassifier(random_state=42, eval_metric='logloss')
+}
+
+# Entrenamiento y evaluación
+resultados = {}
+
+for nombre, modelo in modelos.items():
+    print(f"\n🔧 ENTRENANDO: {nombre}")
+    
+    # Seleccionar datos escalados o no
+    if nombre == 'Regresión Logística':
+        X_tr = X_train_scaled
+        X_te = X_test_scaled
+    else:
+        X_tr = X_train
+        X_te = X_test
+    
+    # Entrenar modelo
+    modelo.fit(X_tr, y_train)
+    
+    # Predecir
+    y_pred = modelo.predict(X_te)
+    y_pred_proba = modelo.predict_proba(X_te)[:, 1] if hasattr(modelo, "predict_proba") else [0]*len(y_test)
+    
+    # Métricas
+    resultados[nombre] = {
+        'Accuracy': accuracy_score(y_test, y_pred),
+        'Precision': precision_score(y_test, y_pred, zero_division=0),
+        'Recall': recall_score(y_test, y_pred, zero_division=0),
+        'F1-Score': f1_score(y_test, y_pred, zero_division=0),
+        'AUC-ROC': roc_auc_score(y_test, y_pred_proba) if len(np.unique(y_test)) > 1 else 0.5
+    }
+    
+    # Validación cruzada
+    cv_scores = cross_val_score(modelo, X_tr, y_train, cv=cv, scoring='f1')
+    resultados[nombre]['CV_F1_Mean'] = cv_scores.mean()
+    resultados[nombre]['CV_F1_Std'] = cv_scores.std()
+    
+    print(f"   Entrenamiento completado")
+    print(f"   F1-Score: {resultados[nombre]['F1-Score']:.4f}")
+    print(f"   AUC-ROC: {resultados[nombre]['AUC-ROC']:.4f}")
+
+# Mostrar resultados comparativos
+print("\n" + "="*60)
+print("COMPARACIÓN DE MODELOS")
+print("="*60)
+for modelo, metrics in resultados.items():
+    print(f"\n{modelo}:")
+    for metric, value in metrics.items():
+        print(f"  {metric}: {value:.4f}")
 </code></pre>
 </div>
 
