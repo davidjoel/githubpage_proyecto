@@ -359,6 +359,33 @@ for modelo, metrics in resultados.items():
         <li>Random Forest: Presenta un mayor recall y una menor precisión, sin embargo es más costoso</li>
         <li>XGBoost: Posee un mejor AUC y en contrapartida presenta una complejidad operacional</li>        
     </ul>
+    <h3 style="color: #004B5F;">5. Criterio de Éxito:</h3>
+    <img src="tabla_comparativa.png" />
+    <strong>RESUMEN ESTADÍSTICO:</strong> 
+    <ul>
+        <li>Mejor modelo: Regresión Logística (F1: 0.5981)</li>
+        <li>Segundo mejor: XGBoost (F1: 0.5587)</li>
+        <li>Diferencia: 0.0394</li>
+        <li>Significancia estadística: p = 0.000000</li>        
+    </ul>
+     <strong>CRITERIOS SECUNDARIOS DE DECISIÓN:</strong> 
+    <ul>
+        <li>Interpretabilidad: Regresión Logística (Coeficientes explicables)</li>
+        <li>Velocidad inferencia: Regresión Logística (Más rápido en producción)</li>
+        <li>Robustez outliers: Random Forest (Menos sensible a valores extremos)</li>
+        <li>Performance crudo: XGBoost (Mejor AUC en algunos casos)</li>        
+    </ul>
+   
+    <img src="comparacion_final.png" />
+    <strong>MODELO GANADOR RECOMENDADO: REGRESIÓN LOGÍSTICA</strong> 
+    <ul>
+        <li>F1-Score: 0.5981</li>
+        <li>Recall: 0.5509</li>
+        <li>Estabilidad: 0.0447</li>
+        
+    </ul>
+    
+    
 </body>
         
 </html>
