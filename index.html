@@ -398,6 +398,27 @@ for modelo, metrics in resultados.items():
     </ul>
     <img src="curva_aprendizaje.png" />
     <br/>     
+    <h3 style="color: #004B5F;">2. Incorporacion de Criterios Inadecuados</h3>
+    <strong>ANÁLISIS DE TIEMPO DE INFERENCIA:</strong> 
+    <ul>
+        <li>Modelo Base: 1.1490s para 10000 inferencias</li>
+        <li>Modelo Optimizado: 1.0770s para 10000 inferencias</li>
+        <li>Diferencia: -0.0720s</li>        
+    </ul>
+    <strong>ANÁLISIS DE INTERPRETABILIDAD:</strong> 
+    <ul>
+        <li>Tiempo permanencia: DISMINUYE probabilidad de churn (coef: -1.2396)</li>
+        <li>Cargos mensuales: AUMENTA probabilidad de churn (coef: 0.6893)</li>
+        <li>Tipo de contrato: DISMINUYE probabilidad de churn (coef: -0.6606)</li>
+        <li>Cargos totales: AUMENTA probabilidad de churn (coef: 0.5867)</li>
+        <li>Servicio Telefonico (S/N): DISMINUYE probabilidad de churn (coef: -0.3003)</li>
+        <li>Seguridad en Linea (S/N): DISMINUYE probabilidad de churn (coef: -0.2443)</li>
+        <li>Soporte Tecnico (S/N): DISMINUYE probabilidad de churn (coef: -0.2273)</li>
+        <li>Servicio de Internet (Fibra/DSL): AUMENTA probabilidad de churn (coef: 0.1606)</li>
+        <li>Facturacion sin Papel: AUMENTA probabilidad de churn (coef: 0.1393)</li>
+        <li>Copia de Seguridad en Linea: DISMINUYE probabilidad de churn (coef: -0.1361)</li>
+    </ul>
+ 
   </body>
         
 </html>
